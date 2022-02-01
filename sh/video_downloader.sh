@@ -1,0 +1,2 @@
+#!/bin/bash
+ffmpeg -user_agent "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36" -protocol_whitelist "file,http,https,crypto,tcp,tls" -i $1 -c copy ~/Downloads/$2
