@@ -8,4 +8,4 @@
 
 "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" "http://127.0.0.1:8080"
 
-ssh -L 8080:192.168.88.1:80 dev@134.249.154.80
+ssh -L 8080:192.168.88.1:80 user@34.49.54.180
