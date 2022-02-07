@@ -20,6 +20,8 @@ Scripts to help you to automate some of your tasks.
 | `py/fastapi_init.py`   | Init new FastApi project |soon...|
 | `py/flask_init.py`   | Init new Flask project |soon...|
 | `py/vue_init.py`   | Init new VUEJS project |soon...|
+| `py/wordpress_urls_parser.py`   | Parse wordpress URLs |soon...|
+| `py/youtube_mails_parser.py`   | Parse youtube authors emails |soon...|
 ||||
 | `go/domainsChecker.go`   | Domains status checker |soon...|
 | `go/filesearch.go`   | Async file searcher |soon...|
