@@ -25,3 +25,4 @@ Scripts to help you to automate some of your tasks.
 ||||
 | `go/domainsChecker.go`   | Domains status checker |soon...|
 | `go/filesearch.go`   | Async file searcher |soon...|
+| `go/todoSearch.go`   | TODO searcher |./todoSearch path|
