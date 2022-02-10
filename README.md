@@ -22,6 +22,7 @@ Scripts to help you to automate some of your tasks.
 | `py/vue_init.py`   | Init new VUEJS project |soon...|
 | `py/wordpress_urls_parser.py`   | Parse wordpress URLs |soon...|
 | `py/youtube_mails_parser.py`   | Parse youtube authors emails |soon...|
+| `py/crop_pdf.py`   | Crop and Watermark PDF |soon...|
 ||||
 | `go/domainsChecker.go`   | Domains status checker |soon...|
 | `go/filesearch.go`   | Async file searcher |soon...|
