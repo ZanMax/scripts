@@ -23,6 +23,7 @@ Scripts to help you to automate some of your tasks.
 | `py/wordpress_urls_parser.py`   | Parse wordpress URLs |soon...|
 | `py/youtube_mails_parser.py`   | Parse youtube authors emails |soon...|
 | `py/crop_pdf.py`   | Crop and Watermark PDF |soon...|
+| `py/crypto_monitoring.py`   | Crypto monitoring using coinmarketcap|soon...|
 ||||
 | `go/domainsChecker.go`   | Domains status checker |soon...|
 | `go/filesearch.go`   | Async file searcher |soon...|
