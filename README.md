@@ -15,6 +15,7 @@ Scripts to help you to automate some of your tasks.
 | `sh/docker_runner.sh`   | RUN some dev containers |soon...|
 | `sh/video_downloader.sh`      | Download video from instagram       |soon...|
 | `sh/site_downloader.sh`   | Download website to static |soon...|
+| `sh/gobuild.sh`   | Go Build tools |soon...|
 ||||
 | `py/ping.py`   | ping some hosts |soon...|
 | `py/fastapi_init.py`   | Init new FastApi project |soon...|
