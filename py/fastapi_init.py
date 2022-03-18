@@ -17,7 +17,7 @@ class bcolors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
-APP_ROOT = Path(__file__).parent.parent
+APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 def touch(path):
     with open(path, 'a'):
