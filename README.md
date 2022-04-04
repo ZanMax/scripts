@@ -16,6 +16,7 @@ Scripts to help you to automate some of your tasks.
 | `sh/video_downloader.sh`      | Download video from instagram       |soon...|
 | `sh/site_downloader.sh`   | Download website to static |soon...|
 | `sh/gobuild.sh`   | Go Build tools |soon...|
+| `console-screenshot.sh`   | Console screenshot using Google Chrome |soon...|
 ||||
 | `py/ping.py`   | ping some hosts |soon...|
 | `py/fastapi_init.py`   | Init new FastApi project |soon...|
