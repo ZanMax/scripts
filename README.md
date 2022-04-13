@@ -17,6 +17,7 @@ Scripts to help you to automate some of your tasks.
 | `sh/site_downloader.sh`   | Download website to static |soon...|
 | `sh/gobuild.sh`   | Go Build tools |soon...|
 | `console-screenshot.sh`   | Console screenshot using Google Chrome |soon...|
+| `pack_lambda.sh`   | Pack AWS lambda function with lib into zip |Run in folder with lambda function|
 ||||
 | `py/ping.py`   | ping some hosts |soon...|
 | `py/fastapi_init.py`   | Init new FastApi project |soon...|
