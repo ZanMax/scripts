@@ -10,3 +10,18 @@ sudo docker-compose up --detach
 ```
 
 Share link: https://signal.tube/#<your_domain_name>
+
+
+### Telegram Proxy
+```bash
+docker run -d -p443:443 --name=mtproto-proxy --restart=always -v proxy-config:/data telegrammessenger/proxy:latest
+docker logs mtproto-proxy
+```
+Copy secret
+```bash
+Secret 1: 00baadf00d15abad1deaa515baadcafe
+```
+
+Register proxy
+
+https://t.me/MTProxybot
