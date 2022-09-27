@@ -25,3 +25,12 @@ Secret 1: 00baadf00d15abad1deaa515baadcafe
 Register proxy
 
 https://t.me/MTProxybot
+
+### Snowflake Proxy / Tor proxy
+```bash
+wget https://gitlab.torproject.org/tpo/anti-censorship/docker-snowflake-proxy/raw/main/docker-compose.yml
+```
+
+```bash
+docker-compose up -d snowflake-proxy
+```
