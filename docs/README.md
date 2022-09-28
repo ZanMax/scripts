@@ -34,3 +34,30 @@ wget https://gitlab.torproject.org/tpo/anti-censorship/docker-snowflake-proxy/ra
 ```bash
 docker-compose up -d snowflake-proxy
 ```
+
+### Setting up a Tor bridge
+```bash
+mkdir bridge
+cd bridge
+wget https://gitlab.torproject.org/tpo/anti-censorship/docker-obfs4-bridge/-/raw/main/docker-compose.yml
+```
+
+Edit bridge/.env 
+```bash
+# Set required variables
+OR_PORT=3344
+PT_PORT=3355
+EMAIL=your@email.com
+
+# If you want, you could change the nickname of your bridge
+#NICKNAME=DockerObfs4Bridge
+
+# Configure the bridge so it will not be distributed by bridgedb:
+OBFS4_ENABLE_ADDITIONAL_VARIABLES=1
+OBFS4V_BridgeDistribution=none
+```
+
+Start the bridge:
+```bash
+docker compose up -d
+```
