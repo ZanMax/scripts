@@ -6,6 +6,16 @@ NC='\033[0m'
 
 clear
 
+# CONFIGS
+
+# docker data folder
+DATA_FOLDER="/mnt/data/docker_data/"
+
+# temp or perm
+STATE="perm"
+
+# END CONFIGS
+
 banner()
 {
   echo "+------------------------------------------+"
@@ -15,7 +25,7 @@ banner()
   echo "+------------------------------------------+"
 }
 
-banner "Docker Runner v0.1"
+banner "Docker Runner v0.2"
 printf "\n"
 
 PS3='Select service: '
@@ -31,7 +41,12 @@ do
             echo -e "${GREEN}User:${NC} ${YELLOW}root${NC}"
             echo -e "${GREEN}Password:${NC} ${RED}docker${NC}"
             printf "\n"
-            sudo docker run --rm -d -p 3306:3306 --name=mysql -v ~/mysql_data:/var/lib/mysql --env="MYSQL_ROOT_PASSWORD=docker" mysql mysqld --default-authentication-plugin=mysql_native_password
+            if [ $STATE == "temp" ]
+            then
+                sudo docker run --rm -d -p 3306:3306 --name=mysql -v ${DATA_FOLDER}mysql_data:/var/lib/mysql --env="MYSQL_ROOT_PASSWORD=docker" mysql mysqld --default-authentication-plugin=mysql_native_password
+            else
+                sudo docker run -d --restart unless-stopped -p 3306:3306 --name=mysql -v ${DATA_FOLDER}mysql_data:/var/lib/mysql --env="MYSQL_ROOT_PASSWORD=docker" mysql mysqld --default-authentication-plugin=mysql_native_password
+            fi
             printf "\n"
             echo -e "${YELLOW}"
             docker ps -f "name=mysql"
@@ -45,7 +60,12 @@ do
             echo -e "${GREEN}User:${NC} ${YELLOW}postgres${NC}"
             echo -e "${GREEN}Password:${NC} ${RED}docker${NC}"
             printf "\n"
-            sudo docker run --rm --name postgres -e POSTGRES_PASSWORD=docker -d -p 5432:5432 -v ~/postgres_data:/var/lib/postgresql/data postgres
+            if [ $STATE == "temp" ]
+            then
+                sudo docker run -d --rm --name postgres -e POSTGRES_PASSWORD=docker -p 5432:5432 -v ${DATA_FOLDER}postgres_data:/var/lib/postgresql/data postgres
+            else
+                sudo docker run -d --restart unless-stopped --name postgres -e POSTGRES_PASSWORD=docker -p 5432:5432 -v ${DATA_FOLDER}postgres_data:/var/lib/postgresql/data postgres
+            fi
             printf "\n"
             echo -e "${YELLOW}"
             docker ps -f "name=postgres"
@@ -57,7 +77,12 @@ do
             echo -e "${GREEN}-> Starting Mongo ... ${NC}"
             echo -e "${GREEN}Port:${NC} 27017"
             printf "\n"
-            sudo docker run --rm -d -p 27017:27017 --name mongo -v ~/mongo_data:/data/db mongo
+            if [ $STATE == "temp" ]
+            then
+                sudo docker run --rm -d -p 27017:27017 --name mongo -v ${DATA_FOLDER}mongo_data:/data/db mongo
+            else
+                sudo docker run -d --restart unless-stopped -p 27017:27017 --name mongo -v ${DATA_FOLDER}mongo_data:/data/db mongo
+            fi
             printf "\n"
             echo -e "${YELLOW}"
             docker ps -f "name=mongo"
@@ -69,7 +94,12 @@ do
             echo -e "${GREEN}-> Starting Redis ... ${NC}"
             echo -e "${GREEN}Port:${NC} 6379"
             printf "\n"
-            sudo docker run --rm -d -p 6379:6379 --name redis --user 1000:50 -v ~/redis_data:/data --entrypoint redis-server redis
+            if [ $STATE == "temp" ]
+            then
+                sudo docker run --rm -d -p 6379:6379 --name redis --user 1000:50 -v ${DATA_FOLDER}redis_data:/data --entrypoint redis-server redis
+            else
+                sudo docker run -d --restart unless-stopped -p 6379:6379 --name redis --user 1000:50 -v ${DATA_FOLDER}redis_data:/data --entrypoint redis-server redis
+            fi
             printf "\n"
             echo -e "${YELLOW}"
             docker ps -f "name=redis"
@@ -84,7 +114,12 @@ do
             echo -e "User: guest"
             echo -e "Password: guest"
             printf "\n"
-            sudo docker run --rm -d --name rabbitmq -p 5672:5672 -p 5673:5673 -p 15672:15672 -v ~/rabbitmq_data:/var/lib/rabbitmq --hostname dev-rabbit rabbitmq:3-management
+            if [ $STATE == "temp" ]
+            then
+                sudo docker run --rm -d --name rabbitmq -p 5672:5672 -p 5673:5673 -p 15672:15672 -v ${DATA_FOLDER}rabbitmq_data:/var/lib/rabbitmq --hostname dev-rabbit rabbitmq:3-management
+            else
+                sudo docker run -d --restart unless-stopped --name rabbitmq -p 5672:5672 -p 5673:5673 -p 15672:15672 -v ${DATA_FOLDER}rabbitmq_data:/var/lib/rabbitmq --hostname dev-rabbit rabbitmq:3-management
+            fi
             printf "\n"
             echo -e "${YELLOW}"
             docker ps -f "name=rabbitmq"
@@ -96,7 +131,12 @@ do
 			echo -e "${GREEN}-> Starting Memcached ... ${NC}"
 			echo -e "${GREEN}Port:${NC} 11211"
             printf "\n"
-            sudo docker run --rm -p 11211:11211 --name memcache -d memcached
+            if [ $STATE == "temp" ]
+            then
+                sudo docker run --rm -p 11211:11211 --name memcache -d memcached
+            else
+                sudo docker run -d --restart unless-stopped -p 11211:11211 --name memcache memcached
+            fi
             printf "\n"
             echo -e "${YELLOW}"
             docker ps -f "name=memcache"
