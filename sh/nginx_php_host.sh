@@ -26,7 +26,7 @@ server {
         server_name $domain www.$domain;
 
         location / {
-            try_files $uri $uri/ /index.php?$args;
+            try_files \$uri \$uri/ /index.php?\$args;
         }
 
         location ~ \.php$ {
