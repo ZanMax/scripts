@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Nessesary Packages: lm-sensors
+# sudo apt -y install lm-sensors
+
 # Detect CPU Brand
 cpu_brand=$(grep -m 1 "vendor_id" /proc/cpuinfo | awk '{print $3}')
 
