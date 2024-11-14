@@ -18,7 +18,7 @@ CRASH_DIR="/var/crash"
 # Print section header
 print_header() {
     local title="$1"
-    echo -e "\n${BOLD}${BLUE}=== $title ===${NC}"
+    echo -e "\n${BOLD}${CYAN}=== $title ===${NC}"
     echo -e "${GRAY}$(printf '=%.0s' {1..50})${NC}\n"
 }
 
@@ -59,18 +59,18 @@ check_root() {
 # Print system information
 print_system_info() {
     print_header "System Information"
-    
+
     print_subheader "Basic System Details"
     echo -e "${GRAY}Hostname:${NC} $(hostname)"
     echo -e "${GRAY}Kernel:${NC} $(uname -r)"
     if [ -f /etc/os-release ]; then
         echo -e "${GRAY}OS:${NC} $(grep PRETTY_NAME /etc/os-release | cut -d'"' -f2)"
     fi
-    
+
     print_subheader "Hardware Information"
     echo -e "${GRAY}CPU:${NC} $(lscpu | grep 'Model name' | cut -d':' -f2 | xargs)"
     echo -e "${GRAY}Memory:${NC} $(free -h | awk '/Mem:/ {print $2}')"
-    
+
     print_subheader "Disk Space"
     df -h / | awk 'NR==1{print $0} NR==2{space=$5; sub(/%/,"",space); if(space>90) printf "'${RED}'%s'${NC}'\n",$0; else if(space>80) printf "'${YELLOW}'%s'${NC}'\n",$0; else printf "'${GREEN}'%s'${NC}'\n",$0}'
 }
@@ -154,27 +154,36 @@ print_memory_status() {
     print_header "Memory Status"
     print_subheader "Current Memory Usage"
     free -h | awk 'NR==1{print "'${BOLD}'"$0"'${NC}'"} NR>1{print $0}'
-    
+
     print_subheader "Top Memory Consumers"
     ps aux --sort=-%mem | head -n 6 | \
     awk 'NR==1{print "'${BOLD}'"$0"'${NC}'"} NR>1{printf "'${GRAY}'%s %s'${NC}' %s\n", $4, $11, $0}'
+}
+
+# Function to create header box
+print_fancy_box() {
+    local title="$1"
+    local width=50
+    local padding=$(( (width - ${#title}) / 2 ))
+
+    echo -e "${BOLD}${PURPLE}"
+    echo "╔$(printf '═%.0s' $(seq 1 $width))╗"
+    printf "║%*s%s%*s║\n" $padding "" "$title" $(( padding + (width - ${#title}) % 2 )) ""
+    echo -e "╚$(printf '═%.0s' $(seq 1 $width))╝${NC}"
 }
 
 # Main execution
 main() {
     # Clear screen for better readability
     clear
-    
+
     # Check root privileges
     check_root
-    
+
     # Print fancy header
-    echo -e "${BOLD}${PURPLE}"
-    echo "╔══════════════════════════════════════════════╗"
-    echo "║         System Crash Analysis Report         ║"
-    echo "╚══════════════════════════════════════════════╝${NC}"
+    print_fancy_box "System Crash Analysis Report"
     echo -e "${GRAY}Generated on: $(date)${NC}\n"
-    
+
     # Run all analysis functions
     print_system_info
     print_uptime
@@ -183,12 +192,9 @@ main() {
     print_boot_logs
     print_kernel_errors
     print_service_status
-    
+
     # Print footer
-    echo -e "\n${BOLD}${PURPLE}"
-    echo "╔══════════════════════════════════════════════╗"
-    echo "║              Analysis Complete               ║"
-    echo "╚══════════════════════════════════════════════╝${NC}"
+    print_fancy_box "Analysis Complete"
 }
 
 # Run main function
